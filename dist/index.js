@@ -281,7 +281,7 @@ var API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 dotenv.config();
 var allowedOrigins = [
   "http://localhost:5000",
-  "https://hamzakhan-03.onrender.com"
+  "https://hamzakhan03.pages.dev"
 ];
 app.use(cors({
   origin: allowedOrigins,
@@ -331,7 +331,7 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
-  const port = parseInt(process.env.PORT || "5000", 10);
+  const port = parseInt(process.env.PORT || "5001", 10);
   server.listen({
     port,
     host: "0.0.0.0",
