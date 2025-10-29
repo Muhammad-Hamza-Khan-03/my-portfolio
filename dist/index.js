@@ -288,6 +288,7 @@ app.use((req, res, next) => {
     throw err;
   });
   if (process.env.SERVER === "development") {
+    const { setupVite } = await import("./vite.js");
     await setupVite(app, server);
   } else {
     serveStatic(app);
