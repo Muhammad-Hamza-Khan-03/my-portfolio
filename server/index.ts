@@ -4,6 +4,7 @@ import { serveStatic, log } from "./vite";
 import dotenv from "dotenv";
 
 const app = express();
+const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 
 dotenv.config();
 

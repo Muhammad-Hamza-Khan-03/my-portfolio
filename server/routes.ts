@@ -7,7 +7,6 @@ import { insertContactMessageSchema } from "@shared/schema";
 export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize Resend client with API key
   const resend = new Resend(process.env.RESEND_API_KEY);
-
   app.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);

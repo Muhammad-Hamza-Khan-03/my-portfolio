@@ -212,7 +212,7 @@ var insertContactMessageSchema = createInsertSchema(contactMessages).omit({
 // server/routes.ts
 async function registerRoutes(app2) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  app2.post("/api/contact", async (req, res) => {
+  app2.post("https://hamzakhan-03.onrender.com/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
       const message = await storage.createContactMessage(validatedData);
@@ -259,7 +259,7 @@ async function registerRoutes(app2) {
       }
     }
   });
-  app2.get("/api/contact/messages", async (_req, res) => {
+  app2.get("https://hamzakhan-03.onrender.com/api/contact/messages", async (_req, res) => {
     try {
       const messages = await storage.getAllContactMessages();
       res.json(messages);

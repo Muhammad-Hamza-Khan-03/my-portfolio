@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
+const API_BASE_URL = "https://hamzakhan-03.onrender.com/"
 export function ContactSection() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ export function ContactSection() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      return await apiRequest("POST", "/api/contact", data);
+      return await apiRequest("POST", `${API_BASE_URL}/api/contact`, data);
     },
     onSuccess: () => {
       toast({
