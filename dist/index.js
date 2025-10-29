@@ -137,6 +137,7 @@ var init_vite = __esm({
 });
 
 // server/index.ts
+import cors from "cors";
 import express2 from "express";
 
 // server/routes.ts
@@ -212,7 +213,7 @@ var insertContactMessageSchema = createInsertSchema(contactMessages).omit({
 // server/routes.ts
 async function registerRoutes(app2) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  app2.post("https://hamzakhan-03.onrender.com/api/contact", async (req, res) => {
+  app2.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
       const message = await storage.createContactMessage(validatedData);
@@ -259,7 +260,7 @@ async function registerRoutes(app2) {
       }
     }
   });
-  app2.get("https://hamzakhan-03.onrender.com/api/contact/messages", async (_req, res) => {
+  app2.get("/api/contact/messages", async (_req, res) => {
     try {
       const messages = await storage.getAllContactMessages();
       res.json(messages);
@@ -276,7 +277,16 @@ async function registerRoutes(app2) {
 await init_vite();
 import dotenv from "dotenv";
 var app = express2();
+var API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 dotenv.config();
+var allowedOrigins = [
+  "http://localhost:5000",
+  "https://hamzakhan-03.onrender.com"
+];
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
 app.use(express2.json({
   verify: (req, _res, buf) => {
     req.rawBody = buf;

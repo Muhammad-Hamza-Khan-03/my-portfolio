@@ -12,9 +12,13 @@ dotenv.config();
 const allowedOrigins = [
   "http://localhost:5000",      
   "https://hamzakhan-03.onrender.com", 
+  
 ];
 
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
 
 declare module 'http' {
   interface IncomingMessage {
