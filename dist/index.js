@@ -3,7 +3,7 @@ import express2 from "express";
 
 // server/routes.ts
 import { createServer } from "http";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 // server/storage.ts
 import { randomUUID } from "crypto";
@@ -73,13 +73,7 @@ var insertContactMessageSchema = createInsertSchema(contactMessages).omit({
 
 // server/routes.ts
 async function registerRoutes(app2) {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
+  const resend = new Resend(process.env.RESEND_API_KEY);
   app2.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
@@ -89,10 +83,12 @@ async function registerRoutes(app2) {
         email: message.email,
         timestamp: message.createdAt
       });
-      const mailOptions = {
-        from: `"Website Contact Form" <${process.env.EMAIL_USER}>`,
+      const emailResponse = await resend.emails.send({
+        from: "Website Contact <onboarding@resend.dev>",
+        // your verified domain email
         to: "hamzakhan102003@gmail.com",
-        subject: `New Contact Form Message from ${message.name}`,
+        // your inbox
+        subject: `New Contact Message from ${message.name}`,
         html: `
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${message.name}</p>
@@ -102,15 +98,15 @@ async function registerRoutes(app2) {
           <hr/>
           <p>Received on: ${new Date(message.createdAt).toLocaleString()}</p>
         `
-      };
-      await transporter.sendMail(mailOptions);
+      });
+      console.log("Resend email response:", emailResponse);
       res.json({
         success: true,
         message: "Your message has been received and emailed. Thank you!",
         id: message.id
       });
     } catch (error) {
-      if (error instanceof Error && error.name === "ZodError") {
+      if (error.name === "ZodError") {
         console.error("Validation error:", error);
         res.status(400).json({
           success: false,
@@ -125,7 +121,7 @@ async function registerRoutes(app2) {
       }
     }
   });
-  app2.get("/api/contact/messages", async (req, res) => {
+  app2.get("/api/contact/messages", async (_req, res) => {
     try {
       const messages = await storage.getAllContactMessages();
       res.json(messages);

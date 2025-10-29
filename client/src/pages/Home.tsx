@@ -21,7 +21,7 @@ export default function Home() {
         <EducationSection />
         <ContactSection />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
