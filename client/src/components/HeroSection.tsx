@@ -72,7 +72,7 @@ export function HeroSection() {
         <div className="flex gap-4 justify-center">
           <Button variant="ghost" size="icon" asChild>
             <a
-              href="https://github.com"
+              href="https://github.com/Muhammad-Hamza-Khan-03"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="hero-link-github"
@@ -83,7 +83,7 @@ export function HeroSection() {
           </Button>
           <Button variant="ghost" size="icon" asChild>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/hamza-khan03/"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="hero-link-linkedin"

@@ -103,7 +103,7 @@ export function ContactSection() {
             <div className="flex gap-4 mt-8">
               <Button variant="outline" size="lg" asChild>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Muhammad-Hamza-Khan-03"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gap-2"
@@ -115,7 +115,7 @@ export function ContactSection() {
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/hamza-khan03/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gap-2"

@@ -73,7 +73,7 @@ export function Navigation() {
               className="hidden md:flex"
             >
               <a
-                href="https://github.com"
+                href="https://github.com/Muhammad-Hamza-Khan-03"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="link-github"
@@ -89,7 +89,7 @@ export function Navigation() {
               className="hidden md:flex"
             >
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/hamza-khan03/"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="link-linkedin"
@@ -161,7 +161,7 @@ export function Navigation() {
               <div className="flex gap-2 pt-2">
                 <Button variant="ghost" size="icon" asChild>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/Muhammad-Hamza-Khan-03"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid="mobile-link-github"
@@ -171,7 +171,7 @@ export function Navigation() {
                 </Button>
                 <Button variant="ghost" size="icon" asChild>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/hamza-khan03/"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid="mobile-link-linkedin"
