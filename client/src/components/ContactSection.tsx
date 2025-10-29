@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
-const API_BASE_URL = "https://hamzakhan-03.onrender.com/"
+const API_BASE_URL = "https://hamzakhan-03.onrender.com"
 export function ContactSection() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({

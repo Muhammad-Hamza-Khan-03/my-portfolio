@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic, log } from "./vite";
@@ -8,6 +9,12 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 
 dotenv.config();
 
+const allowedOrigins = [
+  "http://localhost:5000",      
+  "https://hamzakhan-03.onrender.com", 
+];
+
+app.use(cors());
 
 declare module 'http' {
   interface IncomingMessage {
