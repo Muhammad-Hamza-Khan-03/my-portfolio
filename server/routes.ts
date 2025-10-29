@@ -1,18 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Configure email transporter
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  // Initialize Resend client with API key
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   app.post("/api/contact", async (req, res) => {
     try {
@@ -25,11 +19,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timestamp: message.createdAt,
       });
 
-      // Send email notification
-      const mailOptions = {
-        from: `"Website Contact Form" <${process.env.EMAIL_USER}>`,
-        to: "hamzakhan102003@gmail.com",
-        subject: `New Contact Form Message from ${message.name}`,
+      // Send email using Resend
+      const emailResponse = await resend.emails.send({
+        from: "Website Contact <onboarding@resend.dev>", // your verified domain email
+        to: "hamzakhan102003@gmail.com", // your inbox
+        subject: `New Contact Message from ${message.name}`,
         html: `
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${message.name}</p>
@@ -39,17 +33,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           <hr/>
           <p>Received on: ${new Date(message.createdAt).toLocaleString()}</p>
         `,
-      };
+      });
 
-      await transporter.sendMail(mailOptions);
+      console.log("Resend email response:", emailResponse);
 
       res.json({
         success: true,
         message: "Your message has been received and emailed. Thank you!",
         id: message.id,
       });
-    } catch (error) {
-      if (error instanceof Error && error.name === "ZodError") {
+    } catch (error: any) {
+      if (error.name === "ZodError") {
         console.error("Validation error:", error);
         res.status(400).json({
           success: false,
@@ -65,7 +59,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/contact/messages", async (req, res) => {
+  app.get("/api/contact/messages", async (_req, res) => {
     try {
       const messages = await storage.getAllContactMessages();
       res.json(messages);
