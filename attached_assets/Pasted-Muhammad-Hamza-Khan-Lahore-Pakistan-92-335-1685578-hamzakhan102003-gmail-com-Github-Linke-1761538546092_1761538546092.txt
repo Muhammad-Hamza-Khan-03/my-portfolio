@@ -1,0 +1,44 @@
+Muhammad Hamza Khan​
+Lahore, Pakistan | +92 335 1685578 | hamzakhan102003@gmail.com | Github | LinkedIn
+PROFESSIONAL SUMMARY
+ML Engineer with Bachelors in Data Science from FAST-NU, specializing in Generative AI and Machine
+Learning. Hands-on experience in developing multi-agent systems and end-to-end predictive models.
+Focused on creating intelligent solutions for complex business intelligence challenges.
+WORK EXPERIENCE
+AI Engineer, Hazen.ai​
+June 2025 – August 2025
+●​ Engineered a multi-agent pipeline (4 agents ) from scratch integrated various LLMs (OpenAI, Groqcloud, Gemini) to
+analyze real-time traffic data from natural language queries.
+●​ Automated the conversion of user queries into executable MongoDB aggregation pipelines, reducing data analysis
+time.
+●​ Containerized and deployed the entire workflow using Docker, ensuring scalable and reproducible analytics.
+PROJECTS
+Developer, InsightAI Dashboard​
+June 2024 – May 2025
+●​ Automated data analysis and visualization using Finetuned Code llama and optional integrations with OpenAI
+,Groqcloud, Gemini, enabling plain English queries on CSV/SQL/MongoDB data with automated code generation.
+●​ Implemented multi-agent architecture with 7 specialized agents from scratch for data cleaning, visualization, ML
+recommendations and report generation.
+●​ Automated error recovery, real-time processing, and cost tracking across multiple LLM providers.
+●​ Implemented Frontend using NextJS with fastApi as backend.
+Developer, Document Summary Generator
+●​ Fine-tuned Mistral-7B using Unsloth on ARIX scientific papers for improved comprehension and QA.
+●​ Bench-marked summarization quality using Groq as LLM-as-a-judge.
+●​ Implemented Lang Graph-based agent workflow with Gradio UI for custom query-driven summaries.
+Developer, Blind Navigation System
+●​ Developed object detection navigation aid using PyTorch, YOLOv8, and OpenCV.
+●​ Computed relative distances of detected objects to determine safe navigation paths.
+Developer, E-Commerce Churn Prediction
+●​ Predicted churn with ensemble models (XGBoost, Random Forest), achieving 97% accuracy.
+●​ Applied LIME/SHAP for model interpretability.
+●​ Developed end to end ML pipeline using MLFlow.
+SKILLS
+Languages: C++, Python, JavaScript, TypeScript, HTML, CSS
+Technologies: FastAPI, Flask, TensorFlow, Keras, PyTorch, LlamaCpp, LangChain, LlamaIndex, LangGraph, ChromaDB,
+ETL, OpenAI, Apache Airflow, PySpark
+Tools: Git, Docker.
+EDUCATION
+Bachelor’s in DataScience, FAST-NUCES​
+Aug 2021 - Jun 2025
+●​ Data Structures and Algorithms, Database Systems, Natural Language Processing, Data Visualization and Analysis,
+Generative AI, Object-Oriented Programming
