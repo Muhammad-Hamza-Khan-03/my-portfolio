@@ -9,16 +9,27 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 
 dotenv.config();
 
-const allowedOrigins = [
-  "http://localhost:5000",      
+const allowedOrigins = [   
   "https://hamzakhan03.pages.dev", 
-  
 ];
 
-app.use(cors({
-  origin: allowedOrigins,
-methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (like curl or Postman)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
+
+app.options("*", cors()); // handle preflight requests
 
 declare module 'http' {
   interface IncomingMessage {
@@ -87,7 +98,7 @@ app.use((req, res, next) => {
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5001', 10);
+  const port = parseInt(process.env.PORT || '5000', 10);
   server.listen({
     port,
     host: "0.0.0.0",

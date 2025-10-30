@@ -280,13 +280,23 @@ var app = express2();
 var API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 dotenv.config();
 var allowedOrigins = [
-  "http://localhost:5000",
   "https://hamzakhan03.pages.dev"
 ];
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}));
+app.use(
+  cors({
+    origin: function(origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true
+  })
+);
+app.options("*", cors());
 app.use(express2.json({
   verify: (req, _res, buf) => {
     req.rawBody = buf;
@@ -331,7 +341,7 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
-  const port = parseInt(process.env.PORT || "5001", 10);
+  const port = parseInt(process.env.PORT || "5000", 10);
   server.listen({
     port,
     host: "0.0.0.0",
