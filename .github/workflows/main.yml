@@ -1,0 +1,46 @@
+name: Wake Render Web Service
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 🕕 Runs daily at 6:00 UTC
+  workflow_dispatch:       # Manual trigger button in Actions tab
+
+jobs:
+  wakeup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Keep Render Service Awake
+        env:
+          SERVICE_URL: https://hamzakhan-03.onrender.com/
+        run: |
+          echo "🚀 Starting Render wakeup at $(date)"
+          
+          COUNTER=0
+          FAIL_COUNT=0
+          MAX_FAILS=3
+          MAX_PINGS=30  # ~5 minutes (30 * 10s)
+          
+          while [ $COUNTER -lt $MAX_PINGS ]; do
+            echo "Ping #$((COUNTER+1)) -> $SERVICE_URL"
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SERVICE_URL")
+            echo "Response: $STATUS"
+
+            if [ "$STATUS" -eq 200 ]; then
+              echo "✅ Service is awake."
+              FAIL_COUNT=0
+            else
+              echo "⚠️ Non-200 response ($STATUS)"
+              FAIL_COUNT=$((FAIL_COUNT+1))
+            fi
+
+            if [ $FAIL_COUNT -ge 3 ]; then
+              echo "❌ Failed $FAIL_COUNT times in a row — marking job as failed."
+              exit 1
+            fi
+
+            sleep 10
+            COUNTER=$((COUNTER+1))
+          done
+          
+          echo "🏁 Finished Render wakeup at $(date)"
