@@ -2,6 +2,13 @@ import { Card } from "@/components/ui/card";
 import { GraduationCap, Award, Users } from "lucide-react";
 
 export function AboutSection() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="about" className="py-16 md:py-24 px-6 md:px-8">
       <div className="max-w-4xl mx-auto">
@@ -37,7 +44,10 @@ export function AboutSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="p-6 text-center">
+          <Card
+            className="p-6 text-center cursor-pointer hover:bg-accent/50 transition-colors"
+            onClick={() => scrollToSection("projects")}
+          >
             <div className="text-4xl font-display font-bold text-primary mb-2">
               4+
             </div>
